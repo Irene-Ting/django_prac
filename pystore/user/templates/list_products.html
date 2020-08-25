@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{%block content %}
+        {% if request.user.is_authenticated %}
+        <a class="function" href="/add_product/">add product</a>
+        {% endif %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Inventory</th>
+                <th>Seller</th>
+            </tr>
+            {% for p in products %}
+            <tr>
+                <td><a class="item"href="/product_detail/{{p.id}}/">{{p.name}}</a></td>
+                <td>{{p.price}}</td>
+                <td>{{p.inventory}}</td>
+                <td><a class="item" href="/seller_detail/{{p.seller.id}}/">{{p.seller}}</a></td>
+
+            </tr>
+            {% endfor %}
+        </table>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{%block content %}
+    <body>
+        <form action="" method="post"> {% csrf_token %}
+                <p>
+                    <label>Buyer: </label>
+                    <label>{{buyer.username}}</label>
+                </p>
+                <p>
+                    <label>Seller: </label>
+                    <label>{{seller.username}}</label>
+                </p>
+                <p>
+                    <label>Product: </label>
+                    <label><a class="item"href="/product_detail/{{p.id}}/">{{p.name}}</a></label>
+                </p>
+                <p>
+                    <label>Price: </label>
+                    <label>{{p.price}}</label>
+                </p>
+                <p>
+                    <label>Number: </label>
+                    <input id="number" type="number" name="number" value={{number}}>
+                </p>
+                {% for e in errors %}
+                    <p class="error">{{ e }}</p>
+                {% endfor %}
+            <input type="submit" value="Buy">
+        </form>
+{% endblock %}

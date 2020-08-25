@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{%block content %}
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        {% for s in sellers %}
+            {% if s.product_set.all %}
+                <tr>
+                    <td><a class="item" href="/seller_detail/{{s.id}}/">{{s.username}}</a></td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,38 @@
+"""pystore URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/3.0/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from django.contrib.auth import views as auth_views
+from django.conf.urls import url
+from user.views import list_products, list_seller, product_detail, seller_detail, purchase, add_product, selling_record, buying_record
+from pystore.views import index, register, redirect
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    url(r'^accounts/login/$', auth_views.LoginView.as_view(), name='login'),
+    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name='logout'),
+    url(r'^accounts/register/$', register),
+    url(r'^index/$', index),
+    url(r'^list_products/$', list_products),
+    url(r'^list_sellers/$', list_seller),
+    url(r'^product_detail/(\d+)/$', product_detail),
+    url(r'^seller_detail/(\d+)/$', seller_detail),
+    url(r'^purchase/(\d+)/$', purchase),
+    url(r'^add_product/$', add_product),
+    url(r'^buying_record/$', buying_record),
+    url(r'^selling_record/$', selling_record),
+    url(r'^[\w\d\/\_]*', redirect)
+]

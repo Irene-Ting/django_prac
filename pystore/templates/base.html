@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>pystore</title>
+        {% load static %}
+        <style>
+            html, body {
+                font-family:Georgia, 'Times New Roman', Times, serif; 
+                background: white;
+                margin: 0;
+                height: 100%;
+            }
+            #header {
+                background-image: url("{% static 'store.jpg' %}");        
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: auto;
+                opacity: 0.9;
+                height: 100%;
+                margin: 0px;
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #center_box {
+                text-align: center;
+                background: rgba(0, 0, 0, 0.5);
+                padding: 30px;
+                border-radius: 3%;
+            }
+            #store_name {
+                font-size: xx-large;
+                text-shadow: 0px 0px 10px gray;
+                padding: 5px;
+                margin: 0;
+            }
+            .btn {
+                text-decoration: none;
+                font-size: 18px;
+                background: white;
+            }
+            .btn {
+	            box-shadow:inset 0px 1px 0px 0px #ffffff;
+	            background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	            background-color:#f9f9f9;
+	            border-radius:6px;
+	            border:1px solid #dcdcdc;
+	            display:inline-block;
+	            cursor:pointer;
+	            color:#666666;
+	            font-weight:bold;
+	            padding:6px 24px;
+	            text-decoration:none;
+	            text-shadow:0px 1px 0px #ffffff;
+            }
+            .btn:hover {
+	            background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	            background-color:#e9e9e9;
+            }
+            .btn:active {
+	            position:relative;
+	            top:1px;
+            }
+            h1 {
+                margin: 10px;
+            }
+            #content {
+                text-align: left;
+                margin-top: 30px;
+            }
+            table {
+                width: 100%;
+                font-size: 15pt;
+                border: 3px rgba(255, 255, 255, 0.8) solid;
+            }
+            th {
+                text-align: center;
+                padding: 3px 0 3px 0;
+                border-bottom: 3px rgba(255, 255, 255, 0.8) solid;
+            }
+            td {
+                padding-left: 5px;
+            }
+            .item {
+                text-decoration: none;
+                color: white;
+            }
+            .item:hover {
+                text-decoration: underline;
+            }
+            .function {
+                text-decoration: none;
+                color: white; 
+                font-style: italic;
+                font-size: 15pt;
+                padding-left: 10px;;
+            }
+            .function:hover {
+                text-decoration: underline;
+                color: yellow;
+            }
+            #comment:focus {
+                color: black;
+            }
+            #comment:not(:focus) {
+                color:rgba(0, 0, 0, 0.5);
+            }
+            #comment {
+                margin-top: 10px;
+                background:rgba(255, 255, 255, 0.8)
+            }
+            .error {
+                font-style: italic;
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="header">
+            <div id="center_box">
+                <div id="store_name">
+                    <h1>Pystore</h1>
+                </div>
+                <div id="status">
+                    {% if request.user.is_authenticated %}
+                        <h1>Welcome {{request.user}}</h1>
+                        <a class="btn" href="/accounts/logout/">Log Out</a>
+                        <a class="btn" href="/buying_record/">Buying Records</a>
+                        <a class="btn" href="/selling_record/">Selling Records</a>        
+                    {% else %}
+                        <a class="btn" href="/accounts/login/">Sign In</a> 
+                        <a class="btn" href="/accounts/register/">Sign Up</a>
+                    {% endif %}
+                    <a class="btn" href="/list_products/">View Products</a>
+                    <a class="btn" href="/list_sellers/">View Sellers</a>
+                </div>
+                <div id="content">
+                    {%block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

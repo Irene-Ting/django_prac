@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{%block content %}
+        <table>
+        <tr>
+            <td>Products</td>
+            <td>Seller</td>
+            <td>Number</td>
+            <td>Total</td>
+            <td>Time</td>
+        </tr>
+        {% for t in transactions %}
+        <tr>
+            <td><a class="item"href="/product_detail/{{t.product.id}}/">{{t.product.name}}</a></td>
+            <td><a class="item" href="/seller_detail/{{t.seller.id}}/">{{t.seller.username}}</a></td>
+            <td>{{t.number}}</td>
+            <td>{{t.total}}</td>
+            <td>{{t.pay_time}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+{% endblock %}

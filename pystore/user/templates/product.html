@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{%block content %}
+        <h2>{{p.name}}
+        {% if can_purchase %}
+            <a class="function" href="/purchase/{{id}}/">Purchase</a>
+        {% endif %}</h2>
+        <ul>
+            <li>Description</li>
+            {% if p.description %}
+            <p>{{p.description}}</p>
+            {% else %}
+            <p>none</p>
+            {% endif %}
+            <li>Price: NT${{p.price}}</li>
+            <li>Inventory: {{p.inventory}}</li>
+            <li>Seller: {{p.seller}}</li>
+            <li>Last updated: {{p.last_updated | date:"F j, Y"}}</li>
+        </ul>
+        <h3>Comments</h3>
+        {% if p.comment_set.all %}
+        <table>
+            {% for c in p.comment_set.all %}
+            <tr>
+                <td>{{ c.post_time | date:"F j, Y"}}</td>
+                <td>{{ c.writer }}</td>
+                <td>{{ c.content }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>None</p>
+        {% endif %}
+
+        {% if can_purchase %}
+        <form action="" method="post"> {% csrf_token %}
+            <textarea id="comment" name="content" cols="40" rows="10" maxlength="255" required="" id="id_content">comment...</textarea>
+            <br><input type="submit" value="post">
+        </form>
+        {% endif %}
+{% endblock %}
