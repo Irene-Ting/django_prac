@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath pystore pystore.wsgi --log-file -
